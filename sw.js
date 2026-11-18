@@ -1,6 +1,6 @@
 // Al-Mawārid offline cache: the site and texts work without internet; audio streams when online.
-const V='mw-v1';
-const CORE=['./','index.html','dalail.json','manifest.webmanifest','icon-192.png','nalayn.png'];
+const V='mw-v2';
+const CORE=['./','index.html','dalail.json','manifest.webmanifest','icon-192-v2.png','nalayn.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
