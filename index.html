@@ -19,6 +19,11 @@ body{min-height:100vh;background:var(--g);color:var(--w);font-family:'Poppins',s
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .wrap{max-width:720px;margin:0 auto;padding:44px 22px 120px}
 header{display:flex;align-items:center;gap:16px;margin-bottom:52px}
+.bd{display:flex;align-items:center;gap:16px;min-width:0}
+.links{margin-left:auto;display:flex;gap:8px;flex:none}
+.links a{font-family:'Lekton',monospace;font-size:.92rem;letter-spacing:.03em;color:var(--w);text-decoration:none;border:1px solid var(--w);padding:8px 16px;min-width:118px;white-space:nowrap;text-align:center;transition:.15s}
+.links a:hover{background:var(--w);color:var(--g)}
+@media(max-width:640px){header{flex-direction:column;align-items:stretch}.links{margin-left:0;width:100%}.links a{flex:1;width:auto}}
 .nalayn{width:26px;height:47px;flex:none;background:var(--w);-webkit-mask:var(--nl) center/contain no-repeat;mask:var(--nl) center/contain no-repeat}
 header h1{font-weight:500;font-size:1.45rem;letter-spacing:.01em;line-height:1.1}
 header .d{font-size:.95rem;color:var(--w5);margin-top:3px}
@@ -90,9 +95,13 @@ footer a{color:var(--w7)}
 <body>
 <div class="wrap">
   <header>
-    <span class="nalayn" role="img" aria-label="Na‘layn"></span>
+    <div class="bd"><span class="nalayn" role="img" aria-label="Na‘layn"></span>
     <div><h1>Al-Mawārid <span class="ar" style="font-weight:400;font-size:1.15rem;margin-left:6px">المَوارِد</span></h1>
-      <div class="d lk" id="dates"></div></div>
+      <div class="d lk" id="dates"></div></div></div>
+    <nav class="links">
+      <a href="https://www.youtube.com/@ShaykhAlYaqoubi" target="_blank" rel="noopener">al-Yaqoubi ↗</a>
+      <a href="https://untotheone.com/" target="_blank" rel="noopener">Unto the One ↗</a>
+    </nav>
   </header>
 
   <div class="today">
@@ -175,8 +184,8 @@ const todayP=()=>PORTIONS.filter(p=>p.day===new Date().getDay());
 const DUR=store.get('dur',{});
 function render(){
   const now=new Date(),t=ymd(now),tp=todayP();
-  let h=now.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
-  try{h+=' · '+new Intl.DateTimeFormat('en-GB-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric'}).format(now)}catch(e){}
+  let h=now.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+  try{h+=' · '+new Intl.DateTimeFormat('en-GB-u-ca-islamic-umalqura',{day:'numeric',month:'short',year:'numeric'}).format(now)}catch(e){}
   $('#dates').textContent=h;
   $('#tdName').textContent=tp[0].n;
   $('#tdSub').textContent=tp.length>1?'First portion — and the last, if you’re completing the week':`${tp[0].ord} portion of Dalā’il al-Khayrāt`;
