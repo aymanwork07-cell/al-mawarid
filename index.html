@@ -17,19 +17,24 @@ html{background:var(--g)}
 body{min-height:100vh;background:var(--g);color:var(--w);font-family:'Poppins',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased}
 .lk{font-family:'Lekton',ui-monospace,monospace}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-.wrap{max-width:720px;margin:0 auto;padding:44px 22px 120px}
-header{display:flex;align-items:center;gap:16px;margin-bottom:52px}
+.wrap{padding:40px clamp(20px,4vw,64px) 120px}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(32px,4vw,64px);align-items:start}
+.cols>div{min-width:0}
+@media(max-width:1150px){.cols{grid-template-columns:repeat(2,minmax(0,1fr))}.c3{grid-column:1/-1}}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+header{display:flex;align-items:center;gap:16px;margin-bottom:48px;padding-bottom:28px;border-bottom:1px solid var(--w)}
 .bd{display:flex;align-items:center;gap:16px;min-width:0}
 .links{margin-left:auto;display:flex;gap:8px;flex:none}
 .links a{font-family:'Lekton',monospace;font-size:.92rem;letter-spacing:.03em;color:var(--w);text-decoration:none;border:1px solid var(--w);padding:8px 16px;min-width:118px;white-space:nowrap;text-align:center;transition:.15s}
 .links a:hover{background:var(--w);color:var(--g)}
-@media(max-width:640px){header{flex-direction:column;align-items:stretch}.links{margin-left:0;width:100%}.links a{flex:1;width:auto}}
+@media(max-width:900px){header{flex-direction:column;align-items:stretch}.links{margin-left:0;display:grid;grid-template-columns:repeat(4,1fr)}}
+@media(max-width:560px){.links{grid-template-columns:repeat(2,1fr)}.links a{min-width:0;padding:8px 4px;font-size:.86rem}}
 .nalayn{width:26px;height:47px;flex:none;background:var(--w);-webkit-mask:var(--nl) center/contain no-repeat;mask:var(--nl) center/contain no-repeat}
 header h1{font-weight:500;font-size:1.45rem;letter-spacing:.01em;line-height:1.1}
 header .d{font-size:.95rem;color:var(--w5);margin-top:3px}
 .ar{font-family:'Amiri',serif}
 /* today */
-.today{border:1px solid var(--w);padding:24px;margin-bottom:56px}
+.today{border:1px solid var(--w);padding:24px;margin-bottom:52px}
 .lbl{font-family:'Lekton',monospace;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;color:var(--w5)}
 .today .n{font-size:2rem;font-weight:500;margin:8px 0 2px;line-height:1.2}
 .today .s{color:var(--w7);font-size:.9rem}
@@ -63,7 +68,7 @@ footer a{color:var(--w7)}
 /* bottom player */
 .player{visibility:hidden;position:fixed;left:0;right:0;bottom:0;background:var(--g);border-top:1px solid var(--w);z-index:30;transform:translateY(100%);transition:transform .25s}
 .player.on{transform:none;visibility:visible}
-.player .in{max-width:720px;margin:0 auto;padding:12px 22px 14px;display:grid;grid-template-columns:40px 1fr auto 28px;gap:14px;align-items:center}
+.player .in{padding:12px clamp(20px,4vw,64px) 14px;display:grid;grid-template-columns:40px 1fr auto 28px;gap:14px;align-items:center}
 .player .pl{width:40px;height:40px;background:var(--w);color:var(--g);border-color:var(--w);font-size:.8rem}
 .player .tt{font-size:.92rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .player .bar{height:2px;background:var(--w2);margin-top:8px;cursor:pointer;position:relative}
@@ -99,11 +104,15 @@ footer a{color:var(--w7)}
     <div><h1>Al-Mawārid <span class="ar" style="font-weight:400;font-size:1.15rem;margin-left:6px">المَوارِد</span></h1>
       <div class="d lk" id="dates"></div></div></div>
     <nav class="links">
-      <a href="https://www.youtube.com/@ShaykhAlYaqoubi" target="_blank" rel="noopener">al-Yaqoubi ↗</a>
+      <a href="https://quran.com/" target="_blank" rel="noopener">Quran.com ↗</a>
+      <a href="https://www.youtube.com/@ShaykhAlYaqoubi" target="_blank" rel="noopener">Sh. Yaqoubi ↗</a>
+      <a href="https://www.youtube.com/@HamzaYusuf" target="_blank" rel="noopener">Sh. Hamza Yusuf ↗</a>
       <a href="https://untotheone.com/" target="_blank" rel="noopener">Unto the One ↗</a>
     </nav>
   </header>
 
+  <div class="cols">
+  <div class="c1">
   <div class="today">
     <div class="lbl">Today’s portion</div>
     <div class="n" id="tdName"></div>
@@ -117,15 +126,22 @@ footer a{color:var(--w7)}
     <div class="row nopl" data-open="hizb"><div><div class="t">The Litany of the Sea <span class="ar">حِزْبُ الْبَحْرِ</span></div><span class="m">Imām Abū al-Ḥasan al-Shādhilī</span></div><span class="tm">8 pages →</span></div>
   </section>
 
+  </div>
+  <div class="c2">
   <section>
     <h2><span>Dalā’il al-Khayrāt</span><small>al-Jazūlī</small></h2>
     <div id="dalail"></div>
   </section>
 
+  </div>
+  <div class="c3">
   <section>
     <h2><span>Qaṣīdahs</span><small id="qCount"></small></h2>
     <div id="qasidahs"></div>
   </section>
+
+  </div>
+  </div>
 
   <footer>Texts and Dalā’il recitations: <a href="https://salawat.com/" target="_blank" rel="noopener">salawat.com</a><br>Your progress is saved in this browser.</footer>
 </div>
