@@ -183,7 +183,7 @@ function render(){
   const mon=new Date(now);mon.setDate(now.getDate()-((now.getDay()+6)%7));
   $('#week').innerHTML=[1,2,3,4,5,6,0].map((dw,i)=>{const d=new Date(mon);d.setDate(mon.getDate()+i);
     const done=PORTIONS.some(p=>p.day===dw&&readOn(ymd(d),p.id));
-    return `<span class="${dw===now.getDay()?'on':''} ${done?'done':''}">${'MTWTFSS'[i]}</span>`}).join('');
+    return `<span class="${dw===now.getDay()?'on':''} ${done?'done':''}">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i]}</span>`}).join('');
   $('#dalail').innerHTML=PORTIONS.map(p=>`<div class="row ${cur===p.id?'playing':''}" data-open="${p.id}">
       <div><div class="t">${readOn(t,p.id)?'<span class="ck">✓</span>':''}${p.n}</div><span class="m">${p.ord} portion${p.k===1?' · first':p.k===8?' · last':''}</span></div>
       <span class="tm">${DUR[p.id]?fmt(DUR[p.id]):''}${p.day===now.getDay()?'<span class="tag">TODAY</span>':''}</span>
